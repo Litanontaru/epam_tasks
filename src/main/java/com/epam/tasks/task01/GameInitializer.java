@@ -53,8 +53,9 @@ public class GameInitializer {
     }
 
     private SpectralType getRandomSpectralType(){
-        int spectralType = random.nextInt(6);
-        return SpectralType.values()[spectralType];
+        SpectralType[] types = SpectralType.values();
+        int randomIndex = random.nextInt(types.length);
+        return types[randomIndex];
     }
 
     private int getRandomRadius(){
