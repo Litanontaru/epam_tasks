@@ -117,9 +117,16 @@ public class MyList<E> implements List<E> {
 
     @Override
     public boolean add(E e) {
+        checkAdd(e);
         sizeCheck(elemntsCount + 1);
         elements[elemntsCount++] = e;
         return true;
+    }
+
+    private void checkAdd(E e){
+        if (predicate.test(e)){
+            throw new IllegalArgumentException("Can't add element: " + e);
+        }
     }
 
     private void sizeCheck(int requiredSize){
@@ -139,6 +146,7 @@ public class MyList<E> implements List<E> {
     @Override
     public void add(int index, E element) {
         indexCheckSecond(index);
+        checkAdd(element);
         sizeCheck(elemntsCount + 1);
         System.arraycopy(elements, index, elements, index + 1,elemntsCount - index);
         elements[index] = element;
@@ -152,6 +160,7 @@ public class MyList<E> implements List<E> {
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
+        checkCollectionForAdd(c);
         Object[] cArray = c.toArray();
         int newElementsCount = cArray.length;
         sizeCheck(elemntsCount + newElementsCount);
@@ -160,9 +169,16 @@ public class MyList<E> implements List<E> {
         return !(newElementsCount == 0);
     }
 
+    private void checkCollectionForAdd(Collection<? extends E> c){
+        for (E element : c){
+            checkAdd(element);
+        }
+    }
+
     @Override
     public boolean addAll(int index, Collection<? extends E> c) {
         indexCheckSecond(index);
+        checkCollectionForAdd(c);
         Object[] cArray = c.toArray();
         int newElementsCount = cArray.length;
         sizeCheck(elemntsCount + newElementsCount);
@@ -181,8 +197,15 @@ public class MyList<E> implements List<E> {
     public E remove(int index) {
         indexCheck(index);
         E oldValue = elementData(index);
+        checkRemove(index);
         doRemove(index);
         return oldValue;
+    }
+
+    private void checkRemove(int index){
+        if (predicate.test(elementData(index))){
+            throw new IllegalArgumentException("Can't remove, index: " + index);
+        }
     }
 
     @Override
@@ -190,12 +213,14 @@ public class MyList<E> implements List<E> {
         if (o == null) {
             for (int index = 0; index < elemntsCount; index++)
                 if (elements[index] == null) {
+                    checkRemove(index);
                     doRemove(index);
                     return true;
                 }
         } else {
             for (int index = 0; index < elemntsCount; index++)
                 if (o.equals(elements[index])) {
+                    checkRemove(index);
                     doRemove(index);
                     return true;
                 }
