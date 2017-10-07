@@ -413,4 +413,35 @@ public class MyList<E> implements List<E> {
         }
         return new MyList<>(tmpList ,predicate);
     }
+
+    public <T> List<T> map(Convertible<E, T> function){
+        int capacity = size();
+        if (capacity == 0){
+            throw new NoSuchElementException();
+        }
+        else {
+            List<T> resultList = new ArrayList<>();
+            for (int i = 0; i < capacity; i++){
+                resultList.add(function.map(elementData(i)));
+            }
+            return resultList;
+        }
+    }
+
+    public E reduce (Reducible<E> function){
+        int capacity = size();
+        if (capacity == 0){
+            throw new NoSuchElementException();
+        }
+        else if (capacity == 1) {
+            return elementData(0);
+        }
+        else {
+            E result = elementData(0);
+            for (int i = 1; i < capacity; i++) {
+                result = function.reduce(result, elementData(i));
+            }
+            return result;
+        }
+    }
 }
