@@ -1,6 +1,8 @@
 package com.epam.tasks.task02;
 
 import com.epam.tasks.task03.Convertible;
+import com.epam.tasks.task03.Reducible;
+
 import java.util.*;
 import java.util.function.Predicate;
 
