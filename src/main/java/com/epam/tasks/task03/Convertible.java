@@ -1,4 +1,4 @@
-package com.epam.tasks.task02;
+package com.epam.tasks.task03;
 
 /**
  * Created by Komarov Vasiliy on 07.10.2017.

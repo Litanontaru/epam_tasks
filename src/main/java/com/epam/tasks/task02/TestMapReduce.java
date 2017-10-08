@@ -1,5 +1,7 @@
 package com.epam.tasks.task02;
 
+import com.epam.tasks.task03.Convertible;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
