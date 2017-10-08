@@ -20,7 +20,7 @@ public class TestListRemove {
 
         Predicate<Integer> predicate = (i) -> i % 2 == 0;
 
-        List<Integer> list2 = new MyList<>(list, predicate);
+        List<Integer> list2 = new PredicateList<>(list, predicate);
         list2.remove(0); // successful
         list2.remove(1); // exception
     }

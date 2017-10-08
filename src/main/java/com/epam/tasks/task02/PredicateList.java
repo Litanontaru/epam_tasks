@@ -6,7 +6,7 @@ import java.util.function.Predicate;
  * Created by Komarov Vasiliy on 30.09.2017.
  */
 
-public class MyList<E> implements List<E> {
+public class PredicateList<E> implements List<E> {
     private static final int DEFAULT_SIZE = 10;
 
     private int elemntsCount;
@@ -14,7 +14,7 @@ public class MyList<E> implements List<E> {
     private Object[] elements;
     private Predicate<E> predicate;
 
-    public MyList(Collection<? extends E> c, Predicate<E> predicate){
+    public PredicateList(Collection<? extends E> c, Predicate<E> predicate){
         elements = c.toArray();
         elemntsCount = elements.length;
         if (elemntsCount == 0){
@@ -378,7 +378,7 @@ public class MyList<E> implements List<E> {
             if (lastRet < 0) {
                 throw new IllegalStateException();
             }
-            MyList.this.remove(lastRet);
+            PredicateList.this.remove(lastRet);
             cursor = lastRet;
             lastRet = -1;
         }
@@ -388,12 +388,12 @@ public class MyList<E> implements List<E> {
             if (lastRet < 0) {
                 throw new IllegalStateException();
             }
-            MyList.this.set(lastRet, e);
+            PredicateList.this.set(lastRet, e);
         }
 
         @Override
         public void add(E e) {
-            MyList.this.add(cursor, e);
+            PredicateList.this.add(cursor, e);
             cursor++;
             lastRet = -1;
         }
@@ -411,7 +411,7 @@ public class MyList<E> implements List<E> {
         for (int i = fromIndex; i <= toIndex; i++) {
             tmpList.add(elementData(i));
         }
-        return new MyList<>(tmpList ,predicate);
+        return new PredicateList<>(tmpList ,predicate);
     }
 
     public <T> List<T> map(Convertible<E, T> function){

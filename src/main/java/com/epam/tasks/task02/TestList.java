@@ -23,7 +23,7 @@ public class TestList {
 
         Predicate<Integer> predicate = (i) -> i % 2 == 0;
 
-        List<Integer> list2 = new MyList<>(list, predicate);
+        List<Integer> list2 = new PredicateList<>(list, predicate);
         Iterator<Integer> itr = list2.iterator();
         while (itr.hasNext()){
             itr.hasNext(); // Повторный вызов hasNext() не вызывает потерю данных

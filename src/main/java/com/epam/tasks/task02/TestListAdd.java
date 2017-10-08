@@ -19,7 +19,7 @@ public class TestListAdd {
 
         Predicate<Integer> predicate = (i) -> i % 2 == 0;
 
-        List<Integer> list2 = new MyList<>(list, predicate);
+        List<Integer> list2 = new PredicateList<>(list, predicate);
         list2.add(5); // successful
         list2.add(8); // exception
     }
