@@ -9,15 +9,15 @@ import java.util.function.Predicate;
 public class PredicateList<E> implements List<E> {
     private static final int DEFAULT_SIZE = 10;
 
-    private int elemntsCount;
+    private int elementsCount;
 
     private Object[] elements;
     private Predicate<E> predicate;
 
     public PredicateList(Collection<? extends E> c, Predicate<E> predicate){
         elements = c.toArray();
-        elemntsCount = elements.length;
-        if (elemntsCount == 0){
+        elementsCount = elements.length;
+        if (elementsCount == 0){
             this.elements = new Object[DEFAULT_SIZE];
         }
         this.predicate = predicate;
@@ -25,22 +25,22 @@ public class PredicateList<E> implements List<E> {
 
     @Override
     public int size() {
-        return elemntsCount;
+        return elementsCount;
     }
 
     @Override
     public boolean isEmpty() {
-        return elemntsCount == 0;
+        return elementsCount == 0;
     }
 
     @Override
     public int indexOf(Object o) {
         if (o == null) {
-            for (int i = 0; i < elemntsCount; i++)
+            for (int i = 0; i < elementsCount; i++)
                 if (elements[i] == null)
                     return i;
         } else {
-            for (int i = 0; i < elemntsCount; i++)
+            for (int i = 0; i < elementsCount; i++)
                 if (o.equals(elements[i]))
                     return i;
         }
@@ -50,11 +50,11 @@ public class PredicateList<E> implements List<E> {
     @Override
     public int lastIndexOf(Object o) {
         if (o == null) {
-            for (int i = elemntsCount - 1; i >= 0; i--)
+            for (int i = elementsCount - 1; i >= 0; i--)
                 if (elements[i]==null)
                     return i;
         } else {
-            for (int i = elemntsCount - 1; i >= 0; i--)
+            for (int i = elementsCount - 1; i >= 0; i--)
                 if (o.equals(elements[i]))
                     return i;
         }
@@ -78,16 +78,16 @@ public class PredicateList<E> implements List<E> {
 
     @Override
     public Object[] toArray() {
-        return Arrays.copyOf(elements, elemntsCount);
+        return Arrays.copyOf(elements, elementsCount);
     }
 
     @Override
     public <T> T[] toArray(T[] a) {
-        if (a.length < elemntsCount)
-            return (T[]) Arrays.copyOf(elements, elemntsCount, a.getClass());
-        System.arraycopy(elements, 0, a, 0, elemntsCount);
-        if (a.length > elemntsCount)
-            a[elemntsCount] = null;
+        if (a.length < elementsCount)
+            return (T[]) Arrays.copyOf(elements, elementsCount, a.getClass());
+        System.arraycopy(elements, 0, a, 0, elementsCount);
+        if (a.length > elementsCount)
+            a[elementsCount] = null;
         return a;
     }
 
@@ -102,7 +102,7 @@ public class PredicateList<E> implements List<E> {
     }
 
     private void indexCheck(int index) {
-        if (index >= elemntsCount || index < 0)
+        if (index >= elementsCount || index < 0)
             throw new IndexOutOfBoundsException();
     }
 
@@ -118,8 +118,8 @@ public class PredicateList<E> implements List<E> {
     @Override
     public boolean add(E e) {
         checkAdd(e);
-        sizeCheck(elemntsCount + 1);
-        elements[elemntsCount++] = e;
+        sizeCheck(elementsCount + 1);
+        elements[elementsCount++] = e;
         return true;
     }
 
@@ -147,14 +147,14 @@ public class PredicateList<E> implements List<E> {
     public void add(int index, E element) {
         indexCheckSecond(index);
         checkAdd(element);
-        sizeCheck(elemntsCount + 1);
-        System.arraycopy(elements, index, elements, index + 1,elemntsCount - index);
+        sizeCheck(elementsCount + 1);
+        System.arraycopy(elements, index, elements, index + 1, elementsCount - index);
         elements[index] = element;
-        elemntsCount++;
+        elementsCount++;
     }
 
     private void indexCheckSecond(int index) {
-        if (index > elemntsCount || index < 0)
+        if (index > elementsCount || index < 0)
             throw new IndexOutOfBoundsException();
     }
 
@@ -163,9 +163,9 @@ public class PredicateList<E> implements List<E> {
         checkCollectionForAdd(c);
         Object[] cArray = c.toArray();
         int newElementsCount = cArray.length;
-        sizeCheck(elemntsCount + newElementsCount);
-        System.arraycopy(cArray, 0, elements, elemntsCount, newElementsCount);
-        elemntsCount += newElementsCount;
+        sizeCheck(elementsCount + newElementsCount);
+        System.arraycopy(cArray, 0, elements, elementsCount, newElementsCount);
+        elementsCount += newElementsCount;
         return !(newElementsCount == 0);
     }
 
@@ -181,15 +181,15 @@ public class PredicateList<E> implements List<E> {
         checkCollectionForAdd(c);
         Object[] cArray = c.toArray();
         int newElementsCount = cArray.length;
-        sizeCheck(elemntsCount + newElementsCount);
+        sizeCheck(elementsCount + newElementsCount);
 
-        int numMoved = elemntsCount - index;
+        int numMoved = elementsCount - index;
         if (numMoved > 0)
             System.arraycopy(elements, index, elements, index + newElementsCount,
                     numMoved);
 
         System.arraycopy(cArray, 0, elements, index, newElementsCount);
-        elemntsCount += newElementsCount;
+        elementsCount += newElementsCount;
         return !(newElementsCount == 0);
     }
 
@@ -211,14 +211,14 @@ public class PredicateList<E> implements List<E> {
     @Override
     public boolean remove(Object o) {
         if (o == null) {
-            for (int index = 0; index < elemntsCount; index++)
+            for (int index = 0; index < elementsCount; index++)
                 if (elements[index] == null) {
                     checkRemove(index);
                     doRemove(index);
                     return true;
                 }
         } else {
-            for (int index = 0; index < elemntsCount; index++)
+            for (int index = 0; index < elementsCount; index++)
                 if (o.equals(elements[index])) {
                     checkRemove(index);
                     doRemove(index);
@@ -229,12 +229,12 @@ public class PredicateList<E> implements List<E> {
     }
 
     private void doRemove(int index) {
-        int numMoved = elemntsCount - index - 1;
+        int numMoved = elementsCount - index - 1;
         if (numMoved > 0)
             System.arraycopy(elements, index + 1, elements, index,
                     numMoved);
-        elemntsCount--;
-        elements[elemntsCount] = null;
+        elementsCount--;
+        elements[elementsCount] = null;
     }
 
     @Override
@@ -244,7 +244,7 @@ public class PredicateList<E> implements List<E> {
         if (c == null){
             return result;
         }
-        for (int i = 0; i < elemntsCount; i++){
+        for (int i = 0; i < elementsCount; i++){
             if (c.contains(elements[i])){
                 remove(elements[i]);
                 result = true;
@@ -261,7 +261,7 @@ public class PredicateList<E> implements List<E> {
         if (c == null){
             return result;
         }
-        for (int i = 0; i < elemntsCount; i++){
+        for (int i = 0; i < elementsCount; i++){
             if (!c.contains(elements[i])){
                 remove(elements[i]);
                 result = true;
@@ -273,10 +273,10 @@ public class PredicateList<E> implements List<E> {
 
     @Override
     public void clear() {
-        for (int i = 0; i < elemntsCount; i++){
+        for (int i = 0; i < elementsCount; i++){
             elements[i] = null;
         }
-        elemntsCount = 0;
+        elementsCount = 0;
     }
 
 
@@ -290,8 +290,8 @@ public class PredicateList<E> implements List<E> {
 
         @Override
         public boolean hasNext() {
-            if (cursor < elemntsCount){
-                for (int i = cursor; i < elemntsCount; i++) {
+            if (cursor < elementsCount){
+                for (int i = cursor; i < elementsCount; i++) {
                     if (predicate.test(elementData(i))){
                         return true;
                     }
@@ -303,10 +303,10 @@ public class PredicateList<E> implements List<E> {
 
         @Override
         public E next() {
-            if (cursor >= elemntsCount){
+            if (cursor >= elementsCount){
                 throw new NoSuchElementException();
             }
-            for (int i = cursor; i < elemntsCount; i++) {
+            for (int i = cursor; i < elementsCount; i++) {
                 if (predicate.test(elementData(i))){
                     cursor = i;
                     break;
@@ -401,7 +401,7 @@ public class PredicateList<E> implements List<E> {
 
     @Override
     public List<E> subList(int fromIndex, int toIndex) {
-        if ( fromIndex < 0 || toIndex > elemntsCount){
+        if ( fromIndex < 0 || toIndex > elementsCount){
             throw new IndexOutOfBoundsException();
         }
         if (fromIndex > toIndex) {
