@@ -1,5 +1,6 @@
-package com.epam.tasks.task02;
+package com.epam.tasks.task03;
 
+import com.epam.tasks.task02.PredicateList;
 import com.epam.tasks.task03.Convertible;
 import com.epam.tasks.task03.Reducible;
 
