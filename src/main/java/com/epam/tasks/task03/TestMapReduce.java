@@ -1,10 +1,8 @@
 package com.epam.tasks.task03;
 
 import com.epam.tasks.task02.PredicateList;
-import com.epam.tasks.task03.Convertible;
-import com.epam.tasks.task03.Reducible;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -13,17 +11,14 @@ import java.util.function.Predicate;
  */
 public class TestMapReduce {
     public static void main(String[] args) {
-        List<Integer> list = new ArrayList<>();
-        list.add(1);
-        list.add(2);
-        list.add(8);
-        list.add(3);
-        list.add(4);
-        list.add(5);
+        List<Integer> list = Arrays.asList(1, 2, 8, 3, 4, 5);
 
         Predicate<Integer> predicate = (i) -> i % 2 == 0;
 
         PredicateList<Integer> predicateList = new PredicateList<>(list, predicate);
+
+        System.out.println("The source list:");
+        printElements(predicateList);
 
         List<String> newList = predicateList.map(new Convertible<Integer, String>() {
             @Override
@@ -32,11 +27,9 @@ public class TestMapReduce {
             }
         });
 
-        for (String data : newList){
-            System.out.println(data);
-        }
-
-        System.out.println("-----------------");
+        System.out.println();
+        System.out.println("The result of map():");
+        printElements(newList);
 
         int resultReduce = predicateList.reduce(new Reducible<Integer>() {
             @Override
@@ -45,6 +38,15 @@ public class TestMapReduce {
             }
         });
 
+        System.out.println();
+        System.out.println("The result of reduce():");
         System.out.println(resultReduce);
+    }
+
+    private static void printElements(List list){
+        for (int i = 0; i < list.size(); i++) {
+            System.out.print(list.get(i) + " ");
+        }
+        System.out.println();
     }
 }
