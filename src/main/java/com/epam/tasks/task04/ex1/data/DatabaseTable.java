@@ -14,6 +14,8 @@ public class DatabaseTable implements Cache {
     private static DatabaseTable instance;
     private Map<Integer, String> data = new HashMap<>();
 
+    private DatabaseTable(){}
+
     public static DatabaseTable getInstance(){
         if (instance == null){
             instance = new DatabaseTable();

@@ -8,10 +8,11 @@ import java.util.Map;
 /**
  * Created by Komarov Vasiliy on 11.10.2017.
  */
-@CacheDeclaration(name = "CacheWS2")
 public class CacheWS2 {
     private static CacheWS2 instance;
     public Map<Integer, String> cache = new HashMap<>();
+
+    private CacheWS2(){}
 
     public static CacheWS2 getInstance(){
         if (instance == null){

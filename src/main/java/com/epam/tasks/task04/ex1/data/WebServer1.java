@@ -14,6 +14,8 @@ public class WebServer1 implements Cache {
     private static WebServer1 instance;
     private Map<Integer, String> data = new HashMap<>();
 
+    private WebServer1(){}
+
     public static WebServer1 getInstance(){
         if (instance == null){
             instance = new WebServer1();
