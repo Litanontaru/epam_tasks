@@ -16,7 +16,7 @@ public class Injector {
     private static final String GET_INSTANCE = "getInstance";
     private static final String CACHE_DATA_FIELD = "cache";
 
-    public static boolean injectCache(Object target){
+    public static void injectCache(Object target){
         boolean injected = false;
 
         Class<?> targetClass = target.getClass();
@@ -33,7 +33,7 @@ public class Injector {
                 if (annotation != null) {
                     String cacheName = getNameFromAnnotation(annotation);
                     try {
-                        Class cacheClass = Class.forName(CACHE_PACKAGE + cacheName);
+                        Class<?> cacheClass = Class.forName(CACHE_PACKAGE + cacheName);
                         Method cacheMethod = cacheClass.getMethod(GET_INSTANCE);
                         Object obj = cacheMethod.invoke(null);
                         if (Modifier.isPrivate(fields[i].getModifiers())){
@@ -50,12 +50,7 @@ public class Injector {
                         e.printStackTrace();
                         System.err.println("Method: \"" + GET_INSTANCE + "\"");
                     }
-                    catch (IllegalAccessException e){
-                        e.printStackTrace();
-                        System.err.println("Method: \"" + GET_INSTANCE + "\"");
-                        System.err.println("Argument: null");
-                    }
-                    catch (InvocationTargetException e){
+                    catch (IllegalAccessException | InvocationTargetException e){
                         e.printStackTrace();
                         System.err.println("Method: \"" + GET_INSTANCE + "\"");
                         System.err.println("Argument: null");
@@ -67,7 +62,11 @@ public class Injector {
                 }
             }
         }
-        return injected;
+        if (!injected){
+            throw new IllegalArgumentException("Class "
+                    + targetClass.getName()
+                    + " and its parents don't have annotation 'InjectCache'");
+        }
     }
 
     public static void getParentClasses(Class<?> c, List<Class> targetList){
@@ -91,12 +90,7 @@ public class Injector {
             System.err.println("Method: \"name\"");
             System.err.println("Class: " + annClass);
         }
-        catch (IllegalAccessException e){
-            e.printStackTrace();
-            System.err.println("Method: " + method);
-            System.err.println("Argument: " + annotation);
-        }
-        catch (InvocationTargetException e){
+        catch (IllegalAccessException | InvocationTargetException e){
             e.printStackTrace();
             System.err.println("Method: " + method);
             System.err.println("Argument: " + annotation);
