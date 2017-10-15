@@ -69,7 +69,7 @@ public class Injector {
         }
     }
 
-    public static void getParentClasses(Class<?> c, List<Class> targetList){
+    private static void getParentClasses(Class<?> c, List<Class> targetList){
         Class parent = c.getSuperclass();
         if (parent != null){
             targetList.add(parent);
@@ -77,7 +77,7 @@ public class Injector {
         }
     }
 
-    public static String getNameFromAnnotation(Annotation annotation){
+    private static String getNameFromAnnotation(Annotation annotation){
         Class<?> annClass =  annotation.annotationType();
         String name = null;
         Method method = null;
