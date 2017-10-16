@@ -1,5 +1,8 @@
 package com.epam.tasks.task04.ex1;
 
+import com.epam.tasks.task04.ex1.data.DatabaseTable;
+import com.epam.tasks.task04.ex1.data.WebServer1;
+import com.epam.tasks.task04.ex1.data.WebServer2;
 import com.epam.tasks.task04.ex1.tests.*;
 
 /**
@@ -7,36 +10,33 @@ import com.epam.tasks.task04.ex1.tests.*;
  */
 public class Demonstration {
     public static void start(){
-        FillDataProviders.fillDatabaseTable(1000);
-        FillDataProviders.fillWebServer1(1000);
-        FillDataProviders.fillWebServer2(1000);
+        DatabaseTable databaseTable = new DatabaseTable();
+        WebServer1 webServer1 = new WebServer1();
+        WebServer2 webServer2 = new WebServer2();
 
-        FillCaches.fillCacheDBTable(5);
-        FillCaches.fillCacheWS1(5);
-        FillCaches.fillCacheWS2(5);
+        FillDataProviders.fillDatabaseTable(databaseTable, 1000);
+        FillDataProviders.fillWebServer1(webServer1, 1000);
+        FillDataProviders.fillWebServer2(webServer2, 1000);
 
-        TestClass1 testClass1 = new TestClass1();
-        Injector.injectCache(testClass1);
-        testClass1.printCache();
+        FillCaches.fillCacheDBTable(databaseTable,5);
+        FillCaches.fillCacheWS1(webServer1,5);
+        FillCaches.fillCacheWS2(webServer2,5);
 
-        System.out.println();
-        TestClass2 testClass2 = new TestClass2();
-        Injector.injectCache(testClass2);
-        testClass2.printCache();
+        Injector.injectCache(databaseTable);
+        databaseTable.printCache();
 
         System.out.println();
-        TestClass3 testClass3 = new TestClass3();
-        Injector.injectCache(testClass3);
-        testClass3.printCache();
+        Injector.injectCache(webServer1);
+        webServer1.printCache();
+
+        System.out.println();
+        Injector.injectCache(webServer2);
+        webServer2.printCache();
 
         System.out.println();
         TestClass4 testClass4 = new TestClass4();
         Injector.injectCache(testClass4);
         testClass4.printCache();
 
-        System.out.println();
-        TestClass5 testClass5 = new TestClass5();
-        Injector.injectCache(testClass5);
-        testClass5.printCache();
     }
 }

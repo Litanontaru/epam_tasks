@@ -2,6 +2,7 @@ package com.epam.tasks.task04.ex1.data;
 
 import com.epam.tasks.task04.ex1.Cache;
 import com.epam.tasks.task04.ex1.CacheDeclaration;
+import com.epam.tasks.task04.ex1.InjectCache;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,31 +10,33 @@ import java.util.Map;
 /**
  * Created by Komarov Vasiliy on 11.10.2017.
  */
-@CacheDeclaration(name = "CacheDBTable")
-public class DatabaseTable implements Cache {
-    private static DatabaseTable instance;
+public class DatabaseTable {
     private Map<Integer, String> data = new HashMap<>();
 
-    private DatabaseTable(){}
+    @InjectCache(name = "CacheDBTable")
+    public Map<Integer, String> cache;
 
-    public static DatabaseTable getInstance(){
-        if (instance == null){
-            instance = new DatabaseTable();
-        }
-        return instance;
-    }
-
-    @Override
-    public void put(Integer key, String value) {
+    public void put(Integer key, String value){
         data.put(key, value);
     }
 
-    @Override
-    public String get(Integer key) {
+    public String get(Integer key){
         return data.get(key);
     }
 
     public int getSize(){
         return data.size();
+    }
+
+    public void printCache(){
+        System.out.println("DatabaseTable");
+        System.out.println("Cache name = \"CacheDBTable\"");
+        System.out.println("Field - public");
+        System.out.println("Super class - Object");
+        System.out.println("---------------------");
+        System.out.println("Cache: ");
+        for (Map.Entry pair : cache.entrySet()){
+            System.out.println("Key: " + pair.getKey() + ", value: " + pair.getValue());
+        }
     }
 }
