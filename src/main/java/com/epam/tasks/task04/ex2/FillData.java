@@ -6,8 +6,14 @@ import java.util.*;
  * Created by Komarov Vasiliy on 13.10.2017.
  */
 public class FillData {
-    public static List<Author> fillAuthors(){
-        List<Author> authors = new ArrayList<>();
+    public static void fillDate(List<Author> authors, List<Book> books){
+        authors.clear();
+        books.clear();
+        fillAuthors(authors);
+        fillBooks(authors, books);
+    }
+
+    private static void fillAuthors(List<Author> authors){
         authors.add(new Author("Author-01"
                 , new GregorianCalendar(1955, 6, 19)
                 , Sex.MAN));
@@ -42,12 +48,9 @@ public class FillData {
         authors.add(new Author("Author-10"
                 , new GregorianCalendar(1953, 12, 2)
                 , Sex.WOMAN));
-
-        return authors;
     }
 
-    public static List<Book> fillBooks(List<Author> authors){
-        List<Book> books = new ArrayList<>();
+    private static void fillBooks(List<Author> authors, List<Book> books){
         books.add(new Book("Title-01", 1970, Arrays.asList(authors.get(1))));
         books.add(new Book("Title-02", 1992, Arrays.asList(authors.get(0))));
         books.add(new Book("Title-03", 1974, Arrays.asList(authors.get(3), authors.get(4))));
@@ -58,7 +61,5 @@ public class FillData {
         books.add(new Book("Title-08", 1971, Arrays.asList(authors.get(9))));
         books.add(new Book("Title-09", 1971, Arrays.asList(authors.get(8))));
         books.add(new Book("Title-10", 1983, Arrays.asList(authors.get(8), authors.get(4))));
-
-        return books;
     }
 }

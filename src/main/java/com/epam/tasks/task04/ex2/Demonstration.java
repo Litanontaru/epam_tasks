@@ -6,12 +6,11 @@ import java.util.*;
  * Created by Komarov Vasiliy on 13.10.2017.
  */
 public class Demonstration {
-    public static List<Author> authors;
-    public static List<Book> books;
 
     public static void start(){
-        authors = FillData.fillAuthors();
-        books = FillData.fillBooks(authors);
+        List<Author> authors = new ArrayList<>();
+        List<Book> books = new ArrayList<>();
+        FillData.fillDate(authors, books);
 
         System.out.println("-- Average age of authors --");
         double averageAge = authors
