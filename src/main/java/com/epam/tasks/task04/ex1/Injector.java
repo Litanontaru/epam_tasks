@@ -31,7 +31,8 @@ public class Injector {
             for (int i = 0; i < fields.length; i++) {
                 Annotation annotation = fields[i].getAnnotation(InjectCache.class);
                 if (annotation != null) {
-                    String cacheName = getNameFromAnnotation(annotation);
+                    InjectCache injectCacheAnn = (InjectCache) annotation;
+                    String cacheName = injectCacheAnn.name();
                     try {
                         Class<?> cacheClass = Class.forName(CACHE_PACKAGE + cacheName);
                         Method cacheMethod = cacheClass.getMethod(GET_INSTANCE);
@@ -75,26 +76,5 @@ public class Injector {
             targetList.add(parent);
             getParentClasses(parent, targetList);
         }
-    }
-
-    private static String getNameFromAnnotation(Annotation annotation){
-        Class<?> annClass =  annotation.annotationType();
-        String name = null;
-        Method method = null;
-        try{
-            method = annClass.getMethod("name");
-            name = (String) method.invoke(annotation);
-        }
-        catch (NoSuchMethodException e){
-            System.out.println(e.getClass().getName());
-            System.out.println("Method: \"name\"");
-            System.out.println("Class: " + annClass);
-        }
-        catch (IllegalAccessException | InvocationTargetException e){
-            System.out.println(e.getClass().getName());
-            System.out.println("Method: " + method);
-            System.out.println("Argument: " + annotation);
-        }
-        return name;
     }
 }
