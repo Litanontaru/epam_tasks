@@ -43,21 +43,21 @@ public class Injector {
                         injected = true;
                     }
                     catch (ClassNotFoundException e){
-                        e.printStackTrace();
-                        System.err.println("Class: " + CACHE_PACKAGE + cacheName);
+                        System.out.println(e.getClass().getName());
+                        System.out.println("Class: " + CACHE_PACKAGE + cacheName);
                     }
                     catch (NoSuchMethodException e){
-                        e.printStackTrace();
-                        System.err.println("Method: \"" + GET_INSTANCE + "\"");
+                        System.out.println(e.getClass().getName());
+                        System.out.println("Method: \"" + GET_INSTANCE + "\"");
                     }
                     catch (IllegalAccessException | InvocationTargetException e){
-                        e.printStackTrace();
-                        System.err.println("Method: \"" + GET_INSTANCE + "\"");
-                        System.err.println("Argument: null");
+                        System.out.println(e.getClass().getName());
+                        System.out.println("Method: \"" + GET_INSTANCE + "\"");
+                        System.out.println("Argument: null");
                     }
                     catch (NoSuchFieldException e){
-                        e.printStackTrace();
-                        System.err.println("Field: \"" + CACHE_DATA_FIELD + "\"");
+                        System.out.println(e.getClass().getName());
+                        System.out.println("Field: \"" + CACHE_DATA_FIELD + "\"");
                     }
                 }
             }
@@ -86,14 +86,14 @@ public class Injector {
             name = (String) method.invoke(annotation);
         }
         catch (NoSuchMethodException e){
-            e.printStackTrace();
-            System.err.println("Method: \"name\"");
-            System.err.println("Class: " + annClass);
+            System.out.println(e.getClass().getName());
+            System.out.println("Method: \"name\"");
+            System.out.println("Class: " + annClass);
         }
         catch (IllegalAccessException | InvocationTargetException e){
-            e.printStackTrace();
-            System.err.println("Method: " + method);
-            System.err.println("Argument: " + annotation);
+            System.out.println(e.getClass().getName());
+            System.out.println("Method: " + method);
+            System.out.println("Argument: " + annotation);
         }
         return name;
     }
