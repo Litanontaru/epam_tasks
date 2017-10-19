@@ -9,12 +9,12 @@ import java.util.Map;
 /**
  * Created by Komarov Vasiliy on 11.10.2017.
  */
-@CacheDeclaration(name = "CacheWS2")
-public class CacheWS2 implements Cache {
-    private static CacheWS2 instance;
+@CacheDeclaration(name = "CacheExternalHD")
+public class CacheExternalHD implements Cache {
+    private static CacheExternalHD instance;
     public Map<Integer, String> cache = new HashMap<>();
 
-    private CacheWS2(){}
+    private CacheExternalHD(){}
 
     @Override
     public void put(Integer key, String value) {
@@ -26,9 +26,9 @@ public class CacheWS2 implements Cache {
         return cache.get(key);
     }
 
-    public static CacheWS2 getInstance(){
+    public static CacheExternalHD getInstance(){
         if (instance == null){
-            instance = new CacheWS2();
+            instance = new CacheExternalHD();
         }
         return instance;
     }

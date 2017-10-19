@@ -1,8 +1,8 @@
 package com.epam.tasks.task04.ex1;
 
 import com.epam.tasks.task04.ex1.cacheusers.DatabaseTable;
-import com.epam.tasks.task04.ex1.cacheusers.WebServer1;
-import com.epam.tasks.task04.ex1.cacheusers.WebServer2;
+import com.epam.tasks.task04.ex1.cacheusers.WebServer;
+import com.epam.tasks.task04.ex1.cacheusers.WebServerInheritor;
 import com.epam.tasks.task04.ex1.tests.*;
 
 /**
@@ -11,27 +11,27 @@ import com.epam.tasks.task04.ex1.tests.*;
 public class Demonstration {
     public static void start(){
         DatabaseTable databaseTable = new DatabaseTable();
-        WebServer1 webServer1 = new WebServer1();
-        WebServer2 webServer2 = new WebServer2();
+        WebServer webServer = new WebServer();
+        WebServerInheritor webServerInheritor = new WebServerInheritor();
 
         FillDataProviders.fillDatabaseTable(databaseTable, 1000);
-        FillDataProviders.fillWebServer1(webServer1, 1000);
-        FillDataProviders.fillWebServer2(webServer2, 1000);
+        FillDataProviders.fillWebServer1(webServer, 1000);
+        FillDataProviders.fillWebServer2(webServerInheritor, 1000);
 
         FillCaches.fillCacheDBTable(databaseTable,5);
-        FillCaches.fillCacheWS1(webServer1,5);
-        FillCaches.fillCacheWS2(webServer2,5);
+        FillCaches.fillCacheWS1(webServer,5);
+        FillCaches.fillCacheWS2(webServerInheritor,5);
 
         Injector.injectCache(databaseTable);
         databaseTable.printCache();
 
         System.out.println();
-        Injector.injectCache(webServer1);
-        webServer1.printCache();
+        Injector.injectCache(webServer);
+        webServer.printCache();
 
         System.out.println();
-        Injector.injectCache(webServer2);
-        webServer2.printCache();
+        Injector.injectCache(webServerInheritor);
+        webServerInheritor.printCache();
 
         System.out.println();
         TestClass4 testClass4 = new TestClass4();

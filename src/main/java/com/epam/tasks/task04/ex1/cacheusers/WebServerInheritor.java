@@ -8,11 +8,11 @@ import java.util.Map;
 /**
  * Created by Komarov Vasiliy on 11.10.2017.
  */
-public class WebServer1 {
+public class WebServerInheritor extends WebServer {
     private Map<Integer, String> data = new HashMap<>();
 
-    @InjectCache(name = "CacheWS1")
-    public Map<Integer, String> cache;
+    @InjectCache(name = "CacheExternalHD")
+    private Map<Integer, String> cache;
 
     public void put(Integer key, String value){
         data.put(key, value);
@@ -27,13 +27,17 @@ public class WebServer1 {
     }
 
     public void printCache(){
-        System.out.println("WebServer1");
-        System.out.println("Cache name = \"CacheWS1\"");
-        System.out.println("Field - public");
-        System.out.println("Super class - Object");
+        System.out.println("WebServerInheritor");
+        System.out.println("Cache name = \"CacheExternalHD\"");
+        System.out.println("Field - private");
+        System.out.println("Super class - WebServer");
         System.out.println("---------------------");
-        System.out.println("Cache: ");
+        System.out.println("Cache (current class): ");
         for (Map.Entry pair : cache.entrySet()){
+            System.out.println("Key: " + pair.getKey() + ", value: " + pair.getValue());
+        }
+        System.out.println("Cache (super class): ");
+        for (Map.Entry pair : super.cache.entrySet()){
             System.out.println("Key: " + pair.getKey() + ", value: " + pair.getValue());
         }
     }

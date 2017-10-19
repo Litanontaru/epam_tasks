@@ -8,12 +8,12 @@ import java.util.Map;
  * Created by Komarov Vasiliy on 12.10.2017.
  */
 public class TestClass3 extends TestClass2{
-    @InjectCache(name = "CacheWS1")
+    @InjectCache(name = "CacheWS")
     private Map<Integer, String> webServer_ext;
 
     public void printCache(){
         System.out.println("Test3");
-        System.out.println("Cache name = \"CacheWS1\"");
+        System.out.println("Cache name = \"CacheWS\"");
         System.out.println("Field - private");
         System.out.println("Super class - TestClass2");
         System.out.println("---------------------");
