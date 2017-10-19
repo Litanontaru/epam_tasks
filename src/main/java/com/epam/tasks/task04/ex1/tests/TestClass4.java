@@ -1,6 +1,6 @@
 package com.epam.tasks.task04.ex1.tests;
 
-import com.epam.tasks.task04.ex1.InjectCache;
+import com.epam.tasks.task04.ex1.annotations.InjectCache;
 
 import java.util.Map;
 

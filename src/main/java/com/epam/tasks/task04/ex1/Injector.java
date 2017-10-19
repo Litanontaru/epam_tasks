@@ -1,5 +1,7 @@
 package com.epam.tasks.task04.ex1;
 
+import com.epam.tasks.task04.ex1.annotations.InjectCache;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;

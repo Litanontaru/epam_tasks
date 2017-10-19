@@ -3,9 +3,9 @@ package com.epam.tasks.task04.ex1;
 import com.epam.tasks.task04.ex1.caches.CacheDBTable;
 import com.epam.tasks.task04.ex1.caches.CacheWS1;
 import com.epam.tasks.task04.ex1.caches.CacheWS2;
-import com.epam.tasks.task04.ex1.data.DatabaseTable;
-import com.epam.tasks.task04.ex1.data.WebServer1;
-import com.epam.tasks.task04.ex1.data.WebServer2;
+import com.epam.tasks.task04.ex1.cacheusers.DatabaseTable;
+import com.epam.tasks.task04.ex1.cacheusers.WebServer1;
+import com.epam.tasks.task04.ex1.cacheusers.WebServer2;
 
 import java.util.Random;
 

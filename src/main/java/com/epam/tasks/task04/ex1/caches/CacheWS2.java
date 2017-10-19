@@ -1,7 +1,7 @@
 package com.epam.tasks.task04.ex1.caches;
 
 import com.epam.tasks.task04.ex1.Cache;
-import com.epam.tasks.task04.ex1.CacheDeclaration;
+import com.epam.tasks.task04.ex1.annotations.CacheDeclaration;
 
 import java.util.HashMap;
 import java.util.Map;

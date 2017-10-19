@@ -1,8 +1,8 @@
 package com.epam.tasks.task04.ex1;
 
-import com.epam.tasks.task04.ex1.data.DatabaseTable;
-import com.epam.tasks.task04.ex1.data.WebServer1;
-import com.epam.tasks.task04.ex1.data.WebServer2;
+import com.epam.tasks.task04.ex1.cacheusers.DatabaseTable;
+import com.epam.tasks.task04.ex1.cacheusers.WebServer1;
+import com.epam.tasks.task04.ex1.cacheusers.WebServer2;
 
 /**
  * Created by Komarov Vasiliy on 12.10.2017.
