@@ -11,11 +11,7 @@ import java.util.Map;
  */
 @CacheDeclaration(name = "CacheExternalHD")
 public class CacheExternalHD implements Cache {
-    private Map<Integer, String> cache;
-
-    public CacheExternalHD(){
-        cache = new HashMap<>();
-    }
+    private Map<Integer, String> cache = new HashMap<>();
 
     @Override
     public void put(Integer key, String value) {

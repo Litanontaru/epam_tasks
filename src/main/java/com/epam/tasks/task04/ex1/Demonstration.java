@@ -9,38 +9,104 @@ import com.epam.tasks.task04.ex1.cacheusers.WebServerInheritor;
  * Created by Komarov Vasiliy on 12.10.2017.
  */
 public class Demonstration {
-    public static void start(){
-        DatabaseTable databaseTable = new DatabaseTable();
-        ExternalHD externalHD = new ExternalHD();
-        WebServer webServer = new WebServer();
-        WebServerInheritor webServerInheritor = new WebServerInheritor();
+    public static final int SIZE_OF_TEST_CACHE = 5;
 
+    public static void start(){
+        createAndFillCaches();
+        injectIntoDatabaseTable();
+        injectIntoExternalHD();
+        injectIntoWebServer();
+        injectIntoWebServerInheritor();
+        tryInjectIntoObject();
+    }
+
+    private static void createAndFillCaches(){
         CacheInstances.initialize();
-        CacheInstances.getCaches()
-                .forEach((cache) -> FillCaches.fillCache(cache, 5));
+        CacheInstances.getMapCaches()
+                .values()
+                .forEach((cache) -> FillCaches.fillCache(cache, SIZE_OF_TEST_CACHE));
+    }
+
+    private static void injectIntoDatabaseTable(){
+        DatabaseTable databaseTable = new DatabaseTable();
 
         Injector.injectCache(databaseTable);
-        databaseTable.printCache();
 
-        System.out.println();
+        System.out.println("---------------------");
+        System.out.println("DatabaseTable");
+        System.out.println("Cache name = \"CacheDBTable\"");
+        System.out.println("Field - public");
+        System.out.println("Super class - Object");
+        System.out.println("---------------------");
+        System.out.println("Cache: ");
+
+        for (int i = 0; i < SIZE_OF_TEST_CACHE; i++) {
+            databaseTable.printCache(i);
+        }
+    }
+
+    private static void injectIntoExternalHD(){
+        ExternalHD externalHD = new ExternalHD();
+
         Injector.injectCache(externalHD);
-        webServer.printCache();
 
-        System.out.println();
+        System.out.println("---------------------");
+        System.out.println("ExternalHD");
+        System.out.println("Cache name = \"CacheExternalHD\"");
+        System.out.println("Field - public");
+        System.out.println("Super class - Object");
+        System.out.println("---------------------");
+        System.out.println("Cache: ");
+
+        for (int i = 0; i < SIZE_OF_TEST_CACHE; i++) {
+            externalHD.printCache(i);
+        }
+    }
+
+    private static void injectIntoWebServer(){
+        WebServer webServer = new WebServer();
+
         Injector.injectCache(webServer);
-        webServer.printCache();
 
-        System.out.println();
+        System.out.println("---------------------");
+        System.out.println("WebServer");
+        System.out.println("Cache name = \"CacheWS\"");
+        System.out.println("Field - public");
+        System.out.println("Super class - Object");
+        System.out.println("---------------------");
+        System.out.println("Cache: ");
+
+        for (int i = 0; i < SIZE_OF_TEST_CACHE; i++) {
+            webServer.printCache(i);
+        }
+    }
+
+    private static void injectIntoWebServerInheritor(){
+        WebServerInheritor webServerInheritor = new WebServerInheritor();
+
         Injector.injectCache(webServerInheritor);
-        webServerInheritor.printCache();
 
-        System.out.println();
+        System.out.println("---------------------");
+        System.out.println("WebServerInheritor");
+        System.out.println("Cache name = \"CacheWS\"");
+        System.out.println("Field - private");
+        System.out.println("Super class - WebServer");
+        System.out.println("---------------------");
+
+        for (int i = 0; i < SIZE_OF_TEST_CACHE; i++) {
+            webServerInheritor.printCache(i);
+        }
+    }
+
+    private static void tryInjectIntoObject(){
+        System.out.println("---------------------");
+        System.out.println("Attempt to inject into object without the cache:");
+        System.out.println("---------------------");
         try{
             Injector.injectCache(new Object());
         }
         catch (IllegalArgumentException e){
             System.out.println(e.getMessage());
         }
-
     }
 }
