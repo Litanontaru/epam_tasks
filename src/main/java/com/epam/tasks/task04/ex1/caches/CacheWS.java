@@ -11,10 +11,11 @@ import java.util.Map;
  */
 @CacheDeclaration(name = "CacheWS")
 public class CacheWS implements Cache {
-    private static CacheWS instance;
-    public Map<Integer, String> cache = new HashMap<>();
+    private Map<Integer, String> cache;
 
-    private CacheWS(){}
+    public CacheWS(){
+        cache = new HashMap<>();
+    }
 
     @Override
     public void put(Integer key, String value) {
@@ -24,12 +25,5 @@ public class CacheWS implements Cache {
     @Override
     public String get(Integer key) {
         return cache.get(key);
-    }
-
-    public static CacheWS getInstance(){
-        if (instance == null){
-            instance = new CacheWS();
-        }
-        return instance;
     }
 }

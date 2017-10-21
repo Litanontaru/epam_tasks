@@ -11,10 +11,11 @@ import java.util.Map;
  */
 @CacheDeclaration(name = "CacheDBTable")
 public class CacheDBTable implements Cache {
-    private static CacheDBTable instance;
-    public Map<Integer, String> cache = new HashMap<>();
+    private Map<Integer, String> cache;
 
-    private CacheDBTable(){}
+    public CacheDBTable(){
+        cache = new HashMap<>();
+    }
 
     @Override
     public void put(Integer key, String value) {
@@ -24,12 +25,5 @@ public class CacheDBTable implements Cache {
     @Override
     public String get(Integer key) {
         return cache.get(key);
-    }
-
-    public static CacheDBTable getInstance(){
-        if (instance == null){
-            instance = new CacheDBTable();
-        }
-        return instance;
     }
 }

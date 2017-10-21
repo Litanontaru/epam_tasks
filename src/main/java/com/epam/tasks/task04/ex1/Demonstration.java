@@ -1,9 +1,9 @@
 package com.epam.tasks.task04.ex1;
 
 import com.epam.tasks.task04.ex1.cacheusers.DatabaseTable;
+import com.epam.tasks.task04.ex1.cacheusers.ExternalHD;
 import com.epam.tasks.task04.ex1.cacheusers.WebServer;
 import com.epam.tasks.task04.ex1.cacheusers.WebServerInheritor;
-import com.epam.tasks.task04.ex1.tests.*;
 
 /**
  * Created by Komarov Vasiliy on 12.10.2017.
@@ -11,19 +11,20 @@ import com.epam.tasks.task04.ex1.tests.*;
 public class Demonstration {
     public static void start(){
         DatabaseTable databaseTable = new DatabaseTable();
+        ExternalHD externalHD = new ExternalHD();
         WebServer webServer = new WebServer();
         WebServerInheritor webServerInheritor = new WebServerInheritor();
 
-        FillDataProviders.fillDatabaseTable(databaseTable, 1000);
-        FillDataProviders.fillWebServer1(webServer, 1000);
-        FillDataProviders.fillWebServer2(webServerInheritor, 1000);
-
-        FillCaches.fillCacheDBTable(databaseTable,5);
-        FillCaches.fillCacheWS1(webServer,5);
-        FillCaches.fillCacheWS2(webServerInheritor,5);
+        CacheInstances.initialize();
+        CacheInstances.getCaches()
+                .forEach((cache) -> FillCaches.fillCache(cache, 5));
 
         Injector.injectCache(databaseTable);
         databaseTable.printCache();
+
+        System.out.println();
+        Injector.injectCache(externalHD);
+        webServer.printCache();
 
         System.out.println();
         Injector.injectCache(webServer);
@@ -34,9 +35,12 @@ public class Demonstration {
         webServerInheritor.printCache();
 
         System.out.println();
-        TestClass4 testClass4 = new TestClass4();
-        Injector.injectCache(testClass4);
-        testClass4.printCache();
+        try{
+            Injector.injectCache(new Object());
+        }
+        catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
 
     }
 }

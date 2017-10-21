@@ -8,7 +8,7 @@ import com.epam.tasks.task04.ex1.cacheusers.WebServerInheritor;
  * Created by Komarov Vasiliy on 12.10.2017.
  */
 public class FillDataProviders {
-    public static void fillDatabaseTable(DatabaseTable databaseTable, int elementsCount){
+    /*public static void fillDatabaseTable(DatabaseTable databaseTable, int elementsCount){
         for (int i = 0; i < elementsCount; i++) {
             databaseTable.put(i, "DBT_value_" + (i+1));
         }
@@ -24,6 +24,5 @@ public class FillDataProviders {
         for (int i = 0; i < elementsCount; i++) {
             webServerInheritor.put(i, "WS2_value_" + (i+1));
         }
-    }
-
+    }*/
 }

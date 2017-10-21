@@ -11,10 +11,11 @@ import java.util.Map;
  */
 @CacheDeclaration(name = "CacheExternalHD")
 public class CacheExternalHD implements Cache {
-    private static CacheExternalHD instance;
-    public Map<Integer, String> cache = new HashMap<>();
+    private Map<Integer, String> cache;
 
-    private CacheExternalHD(){}
+    public CacheExternalHD(){
+        cache = new HashMap<>();
+    }
 
     @Override
     public void put(Integer key, String value) {
@@ -24,12 +25,5 @@ public class CacheExternalHD implements Cache {
     @Override
     public String get(Integer key) {
         return cache.get(key);
-    }
-
-    public static CacheExternalHD getInstance(){
-        if (instance == null){
-            instance = new CacheExternalHD();
-        }
-        return instance;
     }
 }
