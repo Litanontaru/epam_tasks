@@ -12,15 +12,21 @@ public class Demonstration {
     public static final int SIZE_OF_TEST_CACHE = 5;
 
     public static void start(){
-        createAndFillCaches();
-        injectIntoDatabaseTable();
-        injectIntoExternalHD();
-        injectIntoWebServer();
-        injectIntoWebServerInheritor();
-        tryInjectIntoObject();
+        try{
+            createAndFillCaches();
+            injectIntoDatabaseTable();
+            injectIntoExternalHD();
+            injectIntoWebServer();
+            injectIntoWebServerInheritor();
+            tryInjectIntoObject();
+        }
+        catch (InstantiationException | IllegalAccessException e){
+            System.out.println(e.getMessage());
+        }
+
     }
 
-    private static void createAndFillCaches(){
+    private static void createAndFillCaches() throws InstantiationException, IllegalAccessException{
         CacheInstances.initialize();
         CacheInstances.getMapCaches()
                 .values()

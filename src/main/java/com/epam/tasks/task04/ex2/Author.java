@@ -43,13 +43,13 @@ public class Author {
     }
 
     public int getAge(){
-        Calendar currentDate;
+        Calendar boundaryDate;
         if (getDateOfDeath() == null) {
-            currentDate = new GregorianCalendar();
+            boundaryDate = new GregorianCalendar();
         }
-        else currentDate = getDateOfDeath();
-        int age = currentDate.get(Calendar.YEAR) - getDateOfBirth().get(Calendar.YEAR);
-        if (currentDate.get(Calendar.DAY_OF_YEAR) <= getDateOfBirth().get(Calendar.DAY_OF_YEAR)){
+        else boundaryDate = getDateOfDeath();
+        int age = boundaryDate.get(Calendar.YEAR) - getDateOfBirth().get(Calendar.YEAR);
+        if (boundaryDate.get(Calendar.DAY_OF_YEAR) <= getDateOfBirth().get(Calendar.DAY_OF_YEAR)){
             age--;
         }
         return age;

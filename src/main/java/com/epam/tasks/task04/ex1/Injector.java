@@ -23,36 +23,36 @@ public class Injector {
 
         Injector.getParentClasses(targetClass, listClasses);
 
-        for (Class<?> cls : listClasses ){
-            Field[] fields = cls.getDeclaredFields();
-            for (int i = 0; i < fields.length; i++) {
-                Annotation annotation = fields[i].getAnnotation(InjectCache.class);
-                if (annotation != null) {
-                    InjectCache injectCacheAnn = (InjectCache) annotation;
-                    String cacheName = injectCacheAnn.name();
-                    if (Modifier.isPrivate(fields[i].getModifiers())){
-                        fields[i].setAccessible(true);
-                    }
-                    try {
+        try {
+            for (Class<?> cls : listClasses) {
+                Field[] fields = cls.getDeclaredFields();
+                for (int i = 0; i < fields.length; i++) {
+                    Annotation annotation = fields[i].getAnnotation(InjectCache.class);
+                    if (annotation != null) {
+                        InjectCache injectCacheAnn = (InjectCache) annotation;
+                        String cacheName = injectCacheAnn.name();
+                        if (Modifier.isPrivate(fields[i].getModifiers())) {
+                            fields[i].setAccessible(true);
+                        }
                         fields[i].set(target, CacheInstances.getCacheInstance(cacheName));
                         injected = true;
                     }
-                    catch (IllegalAccessException e){
-                        System.out.println(e.getMessage());
-                    }
                 }
             }
+            if (!injected){
+                throw new IllegalArgumentException("Class "
+                        + targetClass.getName()
+                        + " and its parents don't have annotation 'InjectCache'");
+            }
         }
-        if (!injected){
-            throw new IllegalArgumentException("Class "
-                    + targetClass.getName()
-                    + " and its parents don't have annotation 'InjectCache'");
+        catch (IllegalAccessException e){
+            System.out.println(e.getMessage());
         }
     }
 
     private static void getParentClasses(Class<?> c, List<Class> targetList){
         Class parent = c.getSuperclass();
-        if (parent != null){
+        if (parent != null && parent != Object.class){
             targetList.add(parent);
             getParentClasses(parent, targetList);
         }

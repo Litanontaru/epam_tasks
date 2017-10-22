@@ -14,18 +14,13 @@ public class CacheInstances {
     private static final String CACHE_PACKAGE = "com.epam.tasks.task04.ex1.caches";
     private static Map<String, Cache> caches = new HashMap<>();
 
-    public static void initialize(){
+    public static void initialize() throws InstantiationException, IllegalAccessException{
         List<Class<?>> classes = ClassFinder.getClassesFromPackage(CACHE_PACKAGE);
         for (Class<?> cls : classes){
             Annotation annotation = cls.getAnnotation(CacheDeclaration.class);
             if (annotation != null){
-                try {
-                    CacheDeclaration cacheDeclarationAnn = (CacheDeclaration) annotation;
-                    caches.put(cacheDeclarationAnn.name(), (Cache)cls.newInstance());
-                }
-                catch (InstantiationException | IllegalAccessException e){
-                    e.getMessage();
-                }
+                CacheDeclaration cacheDeclarationAnn = (CacheDeclaration) annotation;
+                caches.put(cacheDeclarationAnn.name(), (Cache) cls.newInstance());
             }
         }
     }

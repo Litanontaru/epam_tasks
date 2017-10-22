@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
  * Created by Komarov Vasiliy on 13.10.2017.
  */
 public class Demonstration {
+    public static final int RETIREMENT_AGE_OF_MEN = 65;
+    public static final int RETIREMENT_AGE_OF_WOMEN = 63;
 
     public static void start(){
         List<Author> authors = new ArrayList<>();
@@ -40,13 +42,11 @@ public class Demonstration {
     }
 
     private static void printPensioners(List<Author> authors){
-        final int retirementAgeOfMen = 65;
-        final int retirementAgeOfWomen = 63;
         System.out.println("-- Pensioners on 2017 --");
         authors.stream()
                 .filter(a -> a.getDateOfDeath() == null
-                        && ((a.getSex() == Sex.MAN && a.getAge() >= retirementAgeOfMen)
-                        || (a.getSex() == Sex.WOMAN && a.getAge() >= retirementAgeOfWomen)))
+                        && ((a.getSex() == Sex.MAN && a.getAge() >= RETIREMENT_AGE_OF_MEN)
+                        || (a.getSex() == Sex.WOMAN && a.getAge() >= RETIREMENT_AGE_OF_WOMEN)))
                 .forEach(System.out::println);
     }
 
