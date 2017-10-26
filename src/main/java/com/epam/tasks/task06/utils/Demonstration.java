@@ -1,13 +1,10 @@
 package com.epam.tasks.task06.utils;
 
 import com.epam.tasks.task06.Client;
-import com.epam.tasks.task06.trees.BreadthFirstTree;
-import com.epam.tasks.task06.trees.DepthFirstTree;
 import com.epam.tasks.task06.trees.Tree;
 import com.epam.tasks.task06.trees.elements.Vertex;
 import com.epam.tasks.task06.trees.strategies.BreadthFirstSearch;
 import com.epam.tasks.task06.trees.strategies.DepthFirstSearch;
-import com.epam.tasks.task06.utils.TreeCreator;
 import com.epam.tasks.task06.visitors.IncrementVisitor;
 import com.epam.tasks.task06.visitors.PrintVisitor;
 import com.epam.tasks.task06.visitors.Visitor;
