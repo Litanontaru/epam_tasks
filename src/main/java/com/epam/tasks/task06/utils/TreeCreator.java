@@ -4,6 +4,9 @@ import com.epam.tasks.task06.trees.Tree;
 import com.epam.tasks.task06.trees.elements.Branch;
 import com.epam.tasks.task06.trees.elements.Leaf;
 import com.epam.tasks.task06.trees.elements.Vertex;
+import com.epam.tasks.task06.trees.strategies.BreadthFirstSearch;
+import com.epam.tasks.task06.trees.strategies.DepthFirstSearch;
+import com.epam.tasks.task06.trees.strategies.SearchStrategy;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -20,7 +23,8 @@ public class TreeCreator {
             throw new IllegalArgumentException("maxLevelsCount and maxVertexDegree must be > 0");
         }
         Vertex root = createVertex(0, maxLevelsCount, maxVertexDegree);
-        return new Tree(root);
+        SearchStrategy searchStrategy = getRandomSearchStrategy();
+        return new Tree(root, searchStrategy);
     }
 
     private static Vertex createVertex(int currentLevel, int levelsCount, int maxVertexDegree){
@@ -42,5 +46,10 @@ public class TreeCreator {
             }
             return branch;
         }
+    }
+
+    private static SearchStrategy getRandomSearchStrategy() {
+        if (random.nextBoolean()) return new BreadthFirstSearch();
+        else return new DepthFirstSearch();
     }
 }
