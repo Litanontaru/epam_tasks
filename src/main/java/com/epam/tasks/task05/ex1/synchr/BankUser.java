@@ -14,10 +14,12 @@ public class BankUser implements Runnable{
 
     @Override
     public void run() {
-        synchronized (bank) {
             while (bank.hasMoney(sizeOfOneTransaction)) {
-                bank.getMoney(sizeOfOneTransaction);
+                synchronized (bank) {
+                    if (bank.hasMoney(sizeOfOneTransaction)) {
+                        bank.getMoney(sizeOfOneTransaction);
+                    }
+                }
             }
-        }
     }
 }

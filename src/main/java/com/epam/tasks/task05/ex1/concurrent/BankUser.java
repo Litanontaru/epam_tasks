@@ -15,11 +15,13 @@ public class BankUser implements Runnable{
     @Override
     public void run() {
         try {
-            bank.semaphore.acquire();
             while (bank.hasMoney(sizeOfOneTransaction)){
-                bank.getMoney(sizeOfOneTransaction);
+                bank.semaphore.acquire();
+                if (bank.hasMoney(sizeOfOneTransaction)) {
+                    bank.getMoney(sizeOfOneTransaction);
+                }
+                bank.semaphore.release();
             }
-            bank.semaphore.release();
         }
         catch (InterruptedException e){
             Thread.currentThread().interrupt();
