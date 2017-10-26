@@ -15,4 +15,8 @@ public class Tree {
     public Vertex getRoot() {
         return root;
     }
+
+    public void setRoot(Vertex root) {
+        this.root = root;
+    }
 }

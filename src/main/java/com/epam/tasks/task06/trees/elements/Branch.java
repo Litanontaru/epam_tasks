@@ -7,25 +7,20 @@ import java.util.List;
 /**
  * Created by Komarov Vasiliy on 22.10.2017.
  */
-public class Branch implements Vertex {
-    private int value;
+public class Branch extends Leaf {
     private List<Vertex> descendants;
 
     public Branch(int value, List<Vertex> descendants) {
-        this.value = value;
+        super(value);
         this.descendants = descendants;
-    }
-
-    public int getValue() {
-        return value;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
     }
 
     public List<Vertex> getDescendants() {
         return descendants;
+    }
+
+    public Vertex transformToLeaf() {
+        return new Leaf(getValue());
     }
 
     @Override
