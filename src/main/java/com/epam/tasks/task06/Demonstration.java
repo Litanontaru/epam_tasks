@@ -13,7 +13,7 @@ import com.epam.tasks.task06.visitors.Visitor;
  */
 public class Demonstration {
     public static void start() {
-        Tree tree = TreesCreator.createRandomTree(5,3);
+        Tree tree = TreeCreator.createRandomTree(5,3);
         DepthFirstTree dfTree = new DepthFirstTree(tree);
         BreadthFirstTree bfTree = new BreadthFirstTree(tree);
 

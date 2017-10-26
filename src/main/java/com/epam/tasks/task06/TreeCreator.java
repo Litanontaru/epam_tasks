@@ -11,7 +11,7 @@ import java.util.Random;
 /**
  * Created by Komarov Vasiliy on 24.10.2017.
  */
-public class TreesCreator {
+public class TreeCreator {
     private static final int MAX_VERTEX_VALUE = 100;
     private static Random random = new Random(System.currentTimeMillis());
 
