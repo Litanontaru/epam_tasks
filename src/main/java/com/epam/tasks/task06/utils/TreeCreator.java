@@ -1,4 +1,4 @@
-package com.epam.tasks.task06;
+package com.epam.tasks.task06.utils;
 
 import com.epam.tasks.task06.trees.Tree;
 import com.epam.tasks.task06.trees.elements.Branch;
