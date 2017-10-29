@@ -3,6 +3,7 @@ package com.epam.tasks.task05.ex2.synchr;
 /**
  * Created by Komarov Vasiliy on 16.10.2017.
  */
+//Во всём классе кое-где нехватает пробелов
 public class Demonstration{
     public static void start(){
         Fork[] forks = createFiveForks();
@@ -27,6 +28,7 @@ public class Demonstration{
         for (int i = 0; i < philosophers.length; i++) {
             philosophers[i] = new Philosopher("Philosopher-" + (i+1)
                     , forks[i]
+                    //Операцию ниже проще делать через оператор %
                     , i == forks.length-1 ? forks[0] : forks[i+1]
                     , watcher);
         }

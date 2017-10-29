@@ -5,9 +5,14 @@ import java.util.concurrent.Semaphore;
 /**
  * Created by Komarov Vasiliy on 16.10.2017.
  */
+//в коде кое-где не хватает пробелов
 public class Bank {
+    //поле может быть final
+    //Нарушение приципов инкапсуляции и принципа "Open/Closed" из SOLID
     public Semaphore semaphore = new Semaphore(1);
 
+    //В будущем стоит изучить необходимость использования volatile для подобных переменных
+    //В реальном продакшене без volatile это не будет работать
     private int moneyAmount;
 
     public Bank(int moneyAmount){

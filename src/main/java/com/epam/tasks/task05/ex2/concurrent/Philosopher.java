@@ -5,6 +5,7 @@ import java.util.concurrent.Semaphore;
 /**
  * Created by Komarov Vasiliy on 16.10.2017.
  */
+//Во всём классе кое-где нехватает пробелов
 public class Philosopher implements Runnable{
     private static final Semaphore SEMAPHORE = new Semaphore(4);
     private String name;
@@ -18,10 +19,12 @@ public class Philosopher implements Runnable{
     }
 
     private void startEating() throws InterruptedException{
+        //Непонятна роль SEMAPHORE здесь. Самых synchronized уже достаточно.
         SEMAPHORE.acquire();
         synchronized (leftFork){
             synchronized (rightFork){
                 System.out.println(name + " eating");
+                //неясен смысл sleep(0)
                 Thread.sleep(0);
             }
         }
@@ -30,6 +33,7 @@ public class Philosopher implements Runnable{
 
     private void startThinking() throws InterruptedException{
         System.out.println(name + " thinking");
+        //неясен смысл sleep(0)
         Thread.sleep(0);
     }
 
